@@ -1,0 +1,14 @@
+Create FUNCTION Scalar_CheckSumNEWID  
+(  
+    @From int,  
+    @To int,  
+    @Keep int,  
+    @newid varchar(50)  
+)  
+RETURNS float  
+BEGIN  
+    DECLARE @ResultVar float  
+    SELECT @ResultVar=CONVERT(BIGINT,RIGHT(ABS(CHECKSUM(@newid)),9))*0.1/100000000  
+    RETURN @From+round((@To-@From)*@ResultVar,@Keep)  
+END  
+GO  
